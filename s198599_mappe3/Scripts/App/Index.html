@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+
+<html ng-app="App">
+<head>
+    <title>Webstore Faq</title>
+
+    <script src="../angular.min.js"></script>
+    <script src="../jquery-2.1.4.min.js"></script>
+    <script src="../bootstrap.min.js"></script>
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../Content/my-style.css" rel="stylesheet" />
+    <script src="faq_controller.js"></script>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1 class="page-header text-center">Webstore Faq</h1>
+    <div class="container" ng-controller="faq_controller">
+        <div class="row col-lg-12">
+            <div class="text-center" ng-show="loadingData"><h4>Loding data, please wait...</h4></div>
+            
+
+            <div class="col-lg-2" ng-show="showRelevantFaqItems">
+                <h4>Frequent questions</h4>
+                <div ng-repeat="relevant in relevant_list">
+                        <a href="" ng-click="displayRelevantAnswer(relevant)"><h5>{{relevant.Heading}}</h5></a>
+                </div>
+            </div>
+            <div class="col-lg-10 extra-padding" ng-show="information">
+                <h3>Welcome to our Faq page</h3>
+                <p>
+                    On this page you will find all previously asked questions from other customers.<br />
+                    We are constantly trying to improve our customer service, and hope that you will find the information you are looking for.<br />
+                    Please use the "Frequent questions" o the left to browse our most frequently asked questions.<br/>
+                    If you can't find the the answer to your question there, then try the full list further down, where you can filter based on category.<br/>
+                    If you still can't find the answer to your question, then please send us the question and we will return your reply shortly.
+                </p>
+            </div>
+            <div class="col-lg-10 question_div extra-padding" ng-show="relevantAnswer">
+                <div class="item_decor btn-info pull-left"></div>
+                <div>
+                    <h6>Question:</h6><span class="question"> {{relevantBody}}</span>
+                </div>
+                <div>
+                    <h6>Answer:</h6><span class="answer"> {{relevantAnswer}}</span>
+                </div>
+            </div>
+
+        </div><!--end row-->
+        <div class="row col-lg-12">
+            
+            <div class="col-lg-2" ng-show="showCategoryIcons">
+                <h4>Categories</h4>
+                <div ng-repeat="category in category_list"><input type="checkbox"ng-click="filterCategories(category.CategoryID)" /> {{category.CategoryName}}</div>
+                <div class="btn btn-sm btn-info" ng-click="clearFilter()">Clear filter</div>
+            </div><!--end categoryFilter-->
+
+            <div class="col-md-10" ng-show="showFaqItems">
+                <h3 class="text-center">All questions in our database</h3>
+                <div class="question_div" ng-repeat="question in all_questions">
+                    <div class="item_decor btn-info pull-left"></div>
+                    <div>
+                        <h6>Question:</h6><span class="question"> {{question.Body}}</span>
+                    </div>
+                    <div>
+                        <h6>Answer:</h6><span class="answer"> {{question.Answer}}</span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!--end row-->
+    </div>
+</body>
+</html>

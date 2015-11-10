@@ -1,0 +1,50 @@
+﻿
+body{
+    background-color: #333;
+    color: #ccc;
+}
+
+h1{
+    color:#bc9b32;
+}
+.btn{
+    margin-top: 10px;
+}
+
+.question_div{
+    margin-bottom: 10px;
+    padding: 10px 20px;
+}
+
+.border{
+    border-bottom: 1px solid #ccc;
+    
+}
+
+.extra-padding{
+    padding: 0 40px;
+}
+
+.item_decor{
+    width: 4px;
+    height:3em;
+    margin-right: 5px;
+
+}
+
+.question{
+    color: #bc9b32;
+    font-weight: 700;
+}
+
+
+h6{
+    padding-bottom: 0;
+    margin-bottom: 0;
+    color: #ccc;
+    text-decoration:underline;
+}
+
+.row{
+    margin-bottom: 20px;
+}

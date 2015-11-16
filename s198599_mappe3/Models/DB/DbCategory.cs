@@ -14,6 +14,8 @@ namespace s198599_mappe3.Models.DB
 
         public string CategoryName { get; set; }
 
+        public bool IsChecked { get; set; }
+
         public virtual List<DbQuestion> Questions { get; set; }
 
         public string CreatedBy { get; set; }

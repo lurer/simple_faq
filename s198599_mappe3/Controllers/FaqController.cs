@@ -49,7 +49,7 @@ namespace s198599_mappe3.Controllers
         }
 
         //POST: /api/Faq
-        public HttpResponseMessage Post(Question question)
+        public HttpResponseMessage Post([FromBody]Question question)
         {
             if (ModelState.IsValid)
             {

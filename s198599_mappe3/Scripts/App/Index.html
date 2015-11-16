@@ -16,8 +16,7 @@
     <h1 class="page-header text-center">Webstore Faq</h1>
     <div class="container" ng-controller="faq_controller">
         <div class="row col-lg-12">
-            <div class="text-center" ng-show="loadingData"><h4>Loding data, please wait...</h4></div>
-            
+            <div class="text-center" ng-show="loadingData"><h4>Loading data, please wait...</h4></div>
 
             <div class="col-lg-2" ng-show="showRelevantFaqItems">
                 <h4>Frequent questions</h4>
@@ -35,9 +34,10 @@
                     If you still can't find the answer to your question, then please send us the question and we will return your reply shortly.
                 </p>
             </div>
-            <div class="col-lg-10 question_div extra-padding" ng-show="relevantAnswer">
+            <div class="col-lg-10 question_div border extra-padding" ng-show="relevantAnswer">
                 <div class="item_decor btn-info pull-left"></div>
                 <div>
+                    
                     <h6>Question:</h6><span class="question"> {{relevantBody}}</span>
                 </div>
                 <div>
@@ -50,13 +50,16 @@
             
             <div class="col-lg-2" ng-show="showCategoryIcons">
                 <h4>Categories</h4>
-                <div ng-repeat="category in category_list"><input type="checkbox"ng-click="filterCategories(category.CategoryID)" /> {{category.CategoryName}}</div>
+                <div ng-repeat="category in category_list">
+                    <input type="checkbox" ng-model="category.IsChecked" ng-click="filterCategories()" /> {{category.CategoryName}}
+                </div>
                 <div class="btn btn-sm btn-info" ng-click="clearFilter()">Clear filter</div>
+                <div class="btn btn-sm btn-info" ng-click="emptyFaqForm()">Ask question</div>
             </div><!--end categoryFilter-->
 
             <div class="col-md-10" ng-show="showFaqItems">
                 <h3 class="text-center">All questions in our database</h3>
-                <div class="question_div" ng-repeat="question in all_questions">
+                <div class="question_div border" ng-repeat="question in all_questions">
                     <div class="item_decor btn-info pull-left"></div>
                     <div>
                         <h6>Question:</h6><span class="question"> {{question.Body}}</span>
@@ -66,8 +69,41 @@
                     </div>
                 </div>
             </div>
-
+            
+            <div class="col-md-10" ng-show="showFaqForm">
+                <h2>Ask a question</h2>
+                <form name="form" novalidate>
+                    <div class="form-group">
+                        <label>Heading:</label>
+                        <input class="form-control" name="Heading" ng-model="formHeading" ng-required="true" ng-pattern="/^[a-zæøåA-ZÆØÅ0-9. \-]{20,50}$/" />
+                        <p class="label label-danger" ng-show="form.Heading.$invalid && form.Heading.$dirty">Please write a short heading. Minimum 20 characters, maximum 50 characters.</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Question:</label>
+                        <textarea class="form-control" rows="5" name="Question" ng-model="formBody" ng-required="true" ng-pattern="/^[a-zæøåA-ZÆØÅ0-9. \-]{20,5000}$/"></textarea>
+                        <p class="label label-danger" ng-show="form.Question.$invalid && form.Question.$dirty">Please write a meaningful question. Minimum 50 characters long. Maximum 5000 characters.</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Reply to email:</label>
+                        <input class="form-control" name="Email" ng-model="formRespondEmail" ng-required="true" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" />
+                        <p class="label label-danger" ng-show="form.Email.$invalid && form.Email.$dirty">Please write a valid email address.</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Category:</label>
+                        <select name="dropdown"  class="ng-valid ng-dirty" ng-model="selectedCategory" ng-required="true">
+                            <option class="form-control" ng-repeat="category in category_list" value="{{category.CategoryID}}">{{category.CategoryName}}</option>
+                        </select>
+                        <p class="label label-danger" ng-show="form.dropwn.$error.required">Please select a category from the list.</p>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" ng-click="clearFilter()">Cancel</button>
+                        <button class="btn btn-primary" ng-click="registerNewQuestion()" ng-disabled="form.$invalid || selectedCategory == 0">Register</button>
+                    </div>
+                </form>
+            </div>
         </div><!--end row-->
+
+        
     </div>
 </body>
 </html>

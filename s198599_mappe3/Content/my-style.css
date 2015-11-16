@@ -6,9 +6,11 @@ body{
 
 h1{
     color:#bc9b32;
+    text-align:center;
 }
 .btn{
     margin-top: 10px;
+    width: 100px;
 }
 
 .question_div{
@@ -17,12 +19,12 @@ h1{
 }
 
 .border{
-    border-bottom: 1px solid #ccc;
-    
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .extra-padding{
-    padding: 0 40px;
+    padding: 0 20px;
 }
 
 .item_decor{

@@ -14,5 +14,7 @@ namespace s198599_mappe3.Models.Domain
         [Required]
         [RegularExpression("^[A-ZÆØÅa-zæøå.]{5,30}$",ErrorMessage ="Category Name must be between 5 and 30 characters. No digits")]
         public string CategoryName { get; set; }
+
+        public bool IsChecked { get; set; }
     }
 }

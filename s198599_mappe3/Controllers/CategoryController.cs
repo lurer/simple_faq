@@ -31,5 +31,31 @@ namespace s198599_mappe3.Controllers
                 StatusCode = HttpStatusCode.OK
             };
         }
+
+
+        //PUT api/Category/
+        public HttpResponseMessage Put([FromBody] Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                bool OK = db.edit(category);
+                if (OK)
+                {
+                    return new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.OK
+                    };
+                }
+            }
+            
+            return new HttpResponseMessage()
+            {
+                StatusCode = HttpStatusCode.NotFound,
+                Content = new StringContent("Kunne ikke endre Category i DB")
+            };
+        }
     }
+
+
+    
 }
